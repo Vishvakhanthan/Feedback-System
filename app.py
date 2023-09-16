@@ -30,13 +30,13 @@ def generate_frames():
     pass
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="/home/vishvakhanthan/WebAppProjects/Feedback System/templates")
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/video_feed')
+@app.route('/video_feeds')
 def video_feed():
     return Response(rec.main(), mimetype='multipart/x-mixed-replace; boundary=frame')
 

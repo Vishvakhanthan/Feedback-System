@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Hand Gesture Detection</title>
+    <link rel="stylesheet" href="/templates/style.css">
 </head>
+
 <body>
-    <h1>Hand Gesture Detection</h1>
-    <img src="{{ url_for('video_feed') }}" alt="Video Stream" width="640" height="480">
+    <header>
+        <img src="/templates/static/logo.png" alt="Hartley Logo" class="logo">
+        <h1>Hartley College Exhibition - 2023 - Feedback</h1>
+    </header>
+    <div class="video-container">
+        <div class="img-border">
+            <img src="{{ url_for('video_feed') }}" alt="Image not found"
+                onerror="this.onerror=null;this.src='static/image.jpg';" class="video-stream" />
+        </div>
+        <div class="img-border">
+            <img src="{{ url_for('video_feed') }}" alt="Image not found"
+                onerror="this.onerror=null;this.src='static/image.jpg';" class="video-stream" />
+        </div>
+    </div>
+    <div class="gesture-guide">
+        <span class="emoji">✋</span><span class="description">Neutral</span>
+        <span class="emoji">👍</span><span class="description">Good</span>
+        <span class="emoji">👎</span><span class="description">Not Good</span>
+    </div>
+    <footer>
+        <span>&copy;</span>
+        <span>Hartley College - 2023</span>
+    </footer>
 </body>
+
 </html>
