@@ -86,10 +86,14 @@ class GestureRecognizer:
         gestures = self.current_gestures
         self.lock.release()
         y_pos = 50
+        blue = (107,41,0)
+        yellow = (0,197,253)
         for hand_gesture_name in gestures:
             # show the prediction on the frame
             cv2.putText(frame, hand_gesture_name, (10, y_pos), cv2.FONT_HERSHEY_SIMPLEX, 
-                                1, (0,0,255), 2, cv2.LINE_AA)
+                                1, blue, 6, cv2.LINE_AA)
+            cv2.putText(frame, hand_gesture_name, (10, y_pos), cv2.FONT_HERSHEY_SIMPLEX, 
+                                1, yellow, 2, cv2.LINE_AA)
             y_pos += 50
 
     def __result_callback(self, result, output_image, timestamp_ms):
