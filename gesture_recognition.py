@@ -21,7 +21,7 @@ class GestureRecognizer:
 
     def main(self):
         num_hands = 1
-        model_path = "gesture_recognizer.task"
+        model_path = "models/gesture_recognizer.task"
         GestureRecognizer = mp.tasks.vision.GestureRecognizer
         GestureRecognizerOptions = mp.tasks.vision.GestureRecognizerOptions
         VisionRunningMode = mp.tasks.vision.RunningMode
@@ -68,13 +68,13 @@ class GestureRecognizer:
                     
                 self.put_gestures(frame)
 
-            # cv2.imshow('MediaPipe Hands', frame)
             ret, buffer = cv2.imencode('.jpg', frame)
             byte_buffer =  buffer.tobytes()
 
             yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + byte_buffer + b'\r\n')
 
+            # cv2.imshow('Hand Detection', frame)
             # if cv2.waitKey(1) & 0xFF == 27:
             #     print(self.current_gestures)
             #     break
