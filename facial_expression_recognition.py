@@ -82,9 +82,9 @@ while True:
             cv2.putText(frame, expression_label, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 
                                 1, yellow, 2, cv2.LINE_AA)
 
-            first_frame = True
-            if first_frame:
-                cv2.imwrite(f"face.jpg", detected_face)
+            # first_frame = True
+            # if first_frame:
+            #     cv2.imwrite(f"face.jpg", detected_face)
 
 
     # Display the image.
