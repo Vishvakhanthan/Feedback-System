@@ -50,10 +50,10 @@ class GestureRecognizer:
 
         while True:
             ret, frame = cap.read()
-            frame = cv2.flip(frame, 1)
             if not ret:
                 break
             
+            frame = cv2.flip(frame, 1)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = hands.process(frame)
             frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
@@ -61,22 +61,26 @@ class GestureRecognizer:
             
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
+                    # drawing landmarks
                     mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+                    
+                    # setting up image and recognizing expression
                     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=np_array)
                     recognizer.recognize_async(mp_image, timestamp)
                     timestamp = timestamp + 1 # should be monotonically increasing, because in LIVE_STREAM mode
                     
                 self.put_gestures(frame)
 
+            # Return image bytes
             ret, buffer = cv2.imencode('.jpg', frame)
             byte_buffer =  buffer.tobytes()
 
             yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + byte_buffer + b'\r\n')
 
+            # Display the image.
             # cv2.imshow('Hand Detection', frame)
             # if cv2.waitKey(1) & 0xFF == 27:
-            #     print(self.current_gestures)
             #     break
 
         cap.release()
