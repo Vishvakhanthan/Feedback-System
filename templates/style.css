@@ -1,90 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,100&display=swap');
 
 * {
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Poppins';
-    color: black;
+    box-sizing: border-box;
+    user-select: none;
+    font-family: 'Times New Roman', Times, serif;
 }
 
-:root {
-    --blue: #00296b;
-    --yellow: #fdc500;
-    --light-yellow: #667fa6;
-    --light-blue: #fedc66;
-    --dark-blue: #00102b;
-    --dark-yellow: #332700;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    background-image: url("/templates/static/banner\ bg.png");
 }
 
 body {
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+.container {
+    margin: 20px;
     gap: 50px;
-    padding: 25px 0px;
-    font-size: 30px;
-}
-
-.logo {
-    width: 80px;
-}
-
-.video-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    height: 100%;
-}
-
-.img-border {
-    border: var(--blue) solid 16px;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 15px;
-    line-height: 0;
-    margin: 10px;
-    align-items: center;
-    justify-content: center;
-}
-
-.img-border:nth-child(1) {
-    border-color: var(--yellow);
 }
 
 .video-stream {
-    display: inline-block;
     border-radius: 15px;
-    width: 35vw;
+    width: 50vw;
 }
 
-.gesture-guide {
-    margin: 30px 30px 0px 30px;
+
+table.summary {
+    border:none;
+    border-collapse: collapse;
 }
 
-.gesture-guide>span {
-    font-size: 25px;
+table.summary td,
+table.summary th {
+    border: 1px solid #ead93f;
+    padding: 5px 8px;
 }
 
-.description {
-    margin-right: 60px;
-    margin-left: 10px;
+.count {
+    color: white;
 }
 
-footer {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    display: flex;
-    gap: 10px;
-    font-size: 20px;
-    font-weight: 400;
+.header{
+    overflow: hidden;
+    background-image: url(/templates/static/banaer.png);
+    height: fit-content;
+}
+
+.logo{
+    size: 30px;
 }

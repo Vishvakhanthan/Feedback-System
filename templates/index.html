@@ -7,29 +7,127 @@
 </head>
 
 <body>
-    <header>
-        <img src="/templates/static/logo.png" alt="Hartley Logo" class="logo">
-        <h1>Hartley College Exhibition - 2023 - Feedback</h1>
-    </header>
-    <div class="video-container">
-        <div class="img-border">
-            <img src="{{ url_for('hand_gesture') }}" alt="Image not found"
-                onerror="this.onerror=null;this.src='static/image.jpg';" class="video-stream" />
-        </div>
-        <!-- <div class="img-border">
-            <img src="{{ url_for('face_expression') }}" alt="Image not found"
-                onerror="this.onerror=null;this.src='static/image.jpg';" class="video-stream" />
-        </div> -->
-    </div>
-    <div class="gesture-guide">
-        <span class="emoji">✋</span><span class="description">Neutral</span>
-        <span class="emoji">👍</span><span class="description">Good</span>
-        <span class="emoji">👎</span><span class="description">Not Good</span>
-    </div>
-    <footer>
-        <span>&copy;</span>
-        <span>Hartley College - 2023</span>
-    </footer>
+    
+  <div class="header">
+    <img src="/templates/static/banaer.png" style=height:123px; alt="banner">
+  </div>
+
+  <div class="container">
+
+    <img src="{{ url_for('hand_gesture') }}" alt="Image not found"
+        onerror="this.onerror=null;this.src='/templates/static/image.jpg';" class="video-stream" />
+    
+    <div class="debug">
+      <h2 style="font-size: 35px; text-align: center; font-family: 'Times New Roman', Times, serif;color: rgb(230, 215, 6);">Feed-Back Results</h2>
+      <table id="summary-left" class="summary">
+        <thead>
+          <tr>
+            <th hidden>Idx</th>
+            <th hidden>Finger</th>
+            <th style="width: 140px; font-size: 25px; font-family: 'Times New Roman', Times, serif; color: bisque;">Feed-Back</th>
+            <th style="width: 200px; font-size: 25px; font-family: 'Times New Roman', Times, serif; color: bisque;">Users Counting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-size: 25px; font-family: 'Times New Roman', Times, serif; color: khaki;" >Good <img src="/templates/static/good.gif" style="height:25px;" alt="Good:GIF"> </td>
+            <td id="good" class="count"><!-- Good Count --></td>
+            <td hidden>0</td>
+            <td hidden>Thumb</td>
+            <td hidden><span id="curl-0">-</span></td>
+            <td hidden><span id="dir-0">-</span></td>
+          </tr>
+          <tr>
+            <td style="font-size: 25px; font-family: 'Times New Roman', Times, serif; color: khaki;" >Average <img src="/templates/static/average.gif" style="height:25px;" alt="Average:GIF"> </td>
+            <td id="average" class="count"><!-- Average Count --></td>
+            <td hidden>1</td>
+            <td hidden>Index</td>
+            <td hidden><span id="curl-1">-</span></td>
+            <td hidden><span id="dir-1">-</span></td>
+          </tr>
+          <tr>
+            <td style="font-size: 25px; font-family: 'Times New Roman', Times, serif; color: khaki;" >Bad <img src="/templates/static/bad.gif" style="height:25px;" alt="bad:GIF"> </td>
+            <td id="bad" class="count"><!-- Bad Count --></td>
+            <td hidden>2</td>
+            <td hidden>Middle</td>
+            <td hidden><span id="curl-2">-</span></td>
+            <td hidden><span id="dir-2">-</span></td>
+          </tr>
+          <tr hidden>
+            <td>3</td>
+            <td>Ring</td>
+            <td><span id="curl-3">-</span></td>
+            <td><span id="dir-3">-</span></td>
+          </tr>
+          <tr hidden>
+            <td>4</td>
+            <td>Pinky</td>
+            <td><span id="curl-4">-</span></td>
+            <td><span id="dir-4">-</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <h2 hidden>Right Hand</h2>
+      <table id="summary-right"  class="summary">
+        <thead hidden>
+          <tr>
+            <th>Idx</th>
+            <th>Finger</th>
+            <th style="width: 110px">Curl</th>
+            <th style="width: 170px">Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr hidden>
+            <td>0</td>
+            <td>Thumb</td>
+            <td><span id="curl-0">-</span></td>
+            <td><span id="dir-0">-</span></td>
+          </tr>
+          <tr hidden>
+            <td>1</td>
+            <td>Index</td>
+            <td><span id="curl-1">-</span></td>
+            <td><span id="dir-1">-</span></td>
+          </tr>
+          <tr hidden>
+            <td>2</td>
+            <td>Middle</td>
+            <td><span id="curl-2">-</span></td>
+            <td><span id="dir-2">-</span></td>
+          </tr>
+          <tr hidden>
+            <td>3</td>
+            <td>Ring</td>
+            <td><span id="curl-3">-</span></td>
+            <td><span id="dir-3">-</span></td>
+          </tr>
+          <tr>
+            <td hidden>4</td>
+            <td hidden>Pinky</td>
+            <td hidden><span id="curl-4">-</span></td>
+            <td hidden><span id="dir-4">-</span></td>
+            <td style="padding-left:260px; border:none;"><img src="/templates/static/qr.png" style="height: 80px; width: auto;" alt="QR code"></td>
+          </tr>
+        </tbody>
+      </table>
+    
+
+  <script>
+      function updateNumbers() {
+          fetch('/gesture_count')
+          .then(response => response.text())
+          .then(data => {
+            count_array = data.split(', ')
+            document.getElementById('good').innerHTML = count_array[0]
+            document.getElementById('average').innerHTML = count_array[1]
+            document.getElementById('bad').innerHTML = count_array[2]
+          });
+      }
+      setInterval(updateNumbers, 5000); // Update every 5 seconds
+  </script>
+
 </body>
 
 </html>

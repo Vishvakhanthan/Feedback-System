@@ -7,7 +7,7 @@ gesture_recognizer = GestureRecognizer()
 expression_recognizer = ExpressionRecognizer()
 
 
-app = Flask(__name__, static_folder="/home/vishvakhanthan/WebAppProjects/Feedback System/templates")
+app = Flask(__name__, static_folder="templates")
 
 @app.route('/')
 def index():
@@ -16,6 +16,11 @@ def index():
 @app.route('/hand_gesture')
 def hand_gesture():
     return Response(gesture_recognizer.main(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/gesture_count')
+def gesture_count():
+    (good, average, bad) = gesture_recognizer.gesture_count()
+    return f"{good}, {average}, {bad}"
 
 @app.route('/face_expression')
 def face_expression():

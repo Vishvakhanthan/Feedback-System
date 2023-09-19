@@ -74,7 +74,6 @@ class GestureRecognizer:
             # Return image bytes
             ret, buffer = cv2.imencode('.jpg', frame)
             byte_buffer =  buffer.tobytes()
-
             yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + byte_buffer + b'\r\n')
 
@@ -84,6 +83,14 @@ class GestureRecognizer:
             #     break
 
         cap.release()
+
+    def gesture_count(self):
+        data = self.count_data
+        return (
+            data[self.thumb_up_count_key],
+            data[self.open_palm_count_key],
+            data[self.thumb_down_count_key]
+        )
 
     def put_gestures(self, frame):
         self.lock.acquire()
